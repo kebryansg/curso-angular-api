@@ -28,14 +28,39 @@ export class CatalogoControllers {
     ]
     //#endregion
 
+    listContants: any[] = [
+        {
+            Nombre: 'Jorge Guzman',
+            Banco: 'Banco Pichincha',
+            Cuenta: '22xxxxxx47',
+        },
+        {
+            Nombre: 'Sebastian Arguello',
+            Banco: 'Banco Pichincha',
+            Cuenta: '22xxxxxx47',
+        },
+        {
+            Nombre: 'Kevin Suarez',
+            Banco: 'Banco Pichincha',
+            Cuenta: '22xxxxxx36',
+        }
+    ]
+
+
     @Get('')
     getIndex() {
-        return 'Working!!.'
+        return [...this.listTipoCuenta]
+        // return 'Working!!.'
     }
 
     @Get('list')
     getList() {
         return [...this.listItems]
+    }
+
+    @Get('contact')
+    getContacts() {
+        return [...this.listContants]
     }
 
     @Post('')
