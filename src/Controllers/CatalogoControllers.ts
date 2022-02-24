@@ -1,4 +1,4 @@
-import {Post, Get, JsonController, Body} from "routing-controllers";
+import {Post, Get, JsonController, Body, QueryParam} from "routing-controllers";
 import {newUID} from "../Utils/util";
 
 @JsonController('/catalogo/')
@@ -12,18 +12,33 @@ export class CatalogoControllers {
     ]
 
     //#region Catalogos
+    // NT -> Natural
+    // EP -> Empresas
     listTipoCuenta: any[] = [
         {
             id: "ou5l8mchp3s",
-            Descripcion: "Cuenta Ahorro"
+            Descripcion: "Cuenta Ahorro",
+            TipoCuenta:'NT',
         },
         {
             id: "1bxgrnux5m4",
-            Descripcion: "Cuenta Corriente"
+            Descripcion: "Cuenta Corriente",
+            TipoCuenta:'NT',
         },
         {
             id: "av23eu4plma",
-            Descripcion: "Cuenta Ahorro Futuro"
+            Descripcion: "Cuenta Ahorro Futuro",
+            TipoCuenta:'NT',
+        },
+        {
+            id: "av23eu4plma",
+            Descripcion: "Cuenta Corriente Empresa",
+            TipoCuenta:'EP',
+        },
+        {
+            id: "og34eu9plma",
+            Descripcion: "Cuenta Ahorro Futuro Empresa",
+            TipoCuenta:'EP',
         }
     ]
     //#endregion
@@ -32,17 +47,20 @@ export class CatalogoControllers {
         {
             Nombre: 'Jorge Guzman',
             Banco: 'Banco Pichincha',
-            Cuenta: '22xxxxxx47',
+            Cuenta: '22xxxxxx23',
+            IdCuenta: 'ou5l8mchp3s',
         },
         {
             Nombre: 'Sebastian Arguello',
             Banco: 'Banco Pichincha',
             Cuenta: '22xxxxxx47',
+            IdCuenta: '1bxgrnux5m4',
         },
         {
             Nombre: 'Kevin Suarez',
             Banco: 'Banco Pichincha',
             Cuenta: '22xxxxxx36',
+            IdCuenta: 'ou5l8mchp3s',
         }
     ]
 
@@ -53,14 +71,22 @@ export class CatalogoControllers {
         // return 'Working!!.'
     }
 
-    @Get('list')
-    getList() {
-        return [...this.listItems]
+    @Get('tipo-cuenta')
+    getList(@QueryParam('tipo') tipo: string) {
+
+        if(tipo) return this.listTipoCuenta.filter(item => item.TipoCuenta == tipo)
+
+        return [...this.listTipoCuenta]
     }
 
     @Get('contact')
     getContacts() {
         return [...this.listContants]
+    }
+
+    @Get('get-by-contact')
+    getByIdContact(@QueryParam('cod') codigo:string) {
+        return this.listContants.find(item => item.IdCuenta == codigo)
     }
 
     @Post('')
