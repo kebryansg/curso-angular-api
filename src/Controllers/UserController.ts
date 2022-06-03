@@ -22,16 +22,25 @@ export class UserController {
         this.users = [...userJson]
     }
 
-    @Get('')
+    /*@Get('')
     getAll() {
         return [...this.users]
-    }
+    }*/
 
+    /***
+     * Generate Password
+     * @param password
+     */
     @Get('password')
     getPassword(@QueryParam('passw') password: string) {
         return hashPassword(password)
     }
 
+    /**
+     * Login && JWT Generate
+     * @param username
+     * @param password
+     */
     @Post('login')
     @ContentType('application/json')
     login(@BodyParam("username") username: string,
@@ -63,6 +72,10 @@ export class UserController {
 
     }
 
+    /**
+     * Create Owner User
+     * @param body
+     */
     @Post('')
     createUser(@Body() body: any) {
         this.users.push({
@@ -72,11 +85,19 @@ export class UserController {
         })
     }
 
+    /**
+     * Verify UserName
+     * @param userName
+     */
     @Get('exist-name/:name')
     existName(@Param('name') userName: string) {
         return {exists: this.existItem(userName, 'name')};
     }
 
+    /**
+     * Verify Email
+     * @param email
+     */
     @Get('exist-email')
     existEmail(@QueryParam('email') email: string) {
         return {exists: this.existItem(email, 'email')};
