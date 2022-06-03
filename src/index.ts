@@ -3,6 +3,7 @@ import {createExpressServer} from 'routing-controllers';
 import {CatalogoControllers} from "./Controllers/CatalogoControllers";
 import {UserController} from "./Controllers/UserController";
 import {CategoryController} from "./Controllers/CategoryController";
+import {BookController} from "./Controllers/bookController";
 
 // creates express app, registers all controller routes and returns you express app instance
 const app = createExpressServer({
@@ -10,8 +11,8 @@ const app = createExpressServer({
     controllers: [
         CatalogoControllers,
         UserController,
-        CategoryController
-
+        CategoryController,
+        BookController,
     ], // we specify controllers we want to use
 });
 
