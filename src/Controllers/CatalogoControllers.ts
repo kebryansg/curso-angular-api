@@ -18,52 +18,31 @@ export class CatalogoControllers {
         {
             id: "ou5l8mchp3s",
             Descripcion: "Cuenta Ahorro",
-            TipoCuenta:'NT',
+            TipoCuenta: 'NT',
         },
         {
             id: "1bxgrnux5m4",
             Descripcion: "Cuenta Corriente",
-            TipoCuenta:'NT',
+            TipoCuenta: 'NT',
         },
         {
             id: "av23eu4plma",
             Descripcion: "Cuenta Ahorro Futuro",
-            TipoCuenta:'NT',
+            TipoCuenta: 'NT',
         },
         {
             id: "av23eu4plma",
             Descripcion: "Cuenta Corriente Empresa",
-            TipoCuenta:'EP',
+            TipoCuenta: 'EP',
         },
         {
             id: "og34eu9plma",
             Descripcion: "Cuenta Ahorro Futuro Empresa",
-            TipoCuenta:'EP',
+            TipoCuenta: 'EP',
         }
     ]
+
     //#endregion
-
-    listContants: any[] = [
-        {
-            Nombre: 'Jorge Guzman',
-            Banco: 'Banco Pichincha',
-            Cuenta: '22xxxxxx23',
-            IdCuenta: 'ou5l8mchp3s',
-        },
-        {
-            Nombre: 'Sebastian Arguello',
-            Banco: 'Banco Pichincha',
-            Cuenta: '22xxxxxx47',
-            IdCuenta: '1bxgrnux5m4',
-        },
-        {
-            Nombre: 'Kevin Suarez',
-            Banco: 'Banco Pichincha',
-            Cuenta: '22xxxxxx36',
-            IdCuenta: 'ou5l8mchp3s',
-        }
-    ]
-
 
     @Get('')
     getIndex() {
@@ -74,19 +53,9 @@ export class CatalogoControllers {
     @Get('tipo-cuenta')
     getList(@QueryParam('tipo') tipo: string) {
 
-        if(tipo) return this.listTipoCuenta.filter(item => item.TipoCuenta == tipo)
+        if (tipo) return this.listTipoCuenta.filter(item => item.TipoCuenta == tipo)
 
         return [...this.listTipoCuenta]
-    }
-
-    @Get('contact')
-    getContacts() {
-        return [...this.listContants]
-    }
-
-    @Get('get-by-contact')
-    getByIdContact(@QueryParam('cod') codigo:string) {
-        return this.listContants.find(item => item.IdCuenta == codigo)
     }
 
     @Post('')
