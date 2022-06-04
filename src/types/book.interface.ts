@@ -1,10 +1,13 @@
 export interface Book {
     id: string,
     title: string,
-    subtitle: string,
-    isbn13?: number,
-    price?: string,
+    author: string,
+    resume: string,
     image: string,
     url: string,
     userRegister: string,
+    category?: number[];
+    public: boolean,
+    isbn13?: number,
+    price?: string,
 }

@@ -1,7 +1,7 @@
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken"
 import {User} from "../types/user.interface";
-
+let jws = require('jws');
 const newUID = () => Math.random().toString(36).slice(2)
 const SECRET_KEY = 'onboarding-api'
 
@@ -12,6 +12,11 @@ function isPasswordCorrect(password: string, savedPassword: string): boolean {
 function hashPassword(password: string) {
     password = bcrypt.hashSync(password, 12);
     return password;
+}
+
+function decodeToken(token: string) {
+    let result = jws.decode(token);
+    return result ? result.payload : null;
 }
 
 function generateJwt(user: User) {
@@ -30,6 +35,7 @@ function generateJwt(user: User) {
 export {
     newUID,
     isPasswordCorrect,
+    decodeToken,
     hashPassword,
     generateJwt,
 }
