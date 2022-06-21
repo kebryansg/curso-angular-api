@@ -1,8 +1,9 @@
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken"
 import {User} from "../types/user.interface";
+
 let jws = require('jws');
-const newUID = () => Math.random().toString(36).slice(2)
+const newUID = (): string => Math.random().toString(36).slice(2)
 const SECRET_KEY = 'onboarding-api'
 
 function isPasswordCorrect(password: string, savedPassword: string): boolean {

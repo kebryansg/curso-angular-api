@@ -76,7 +76,7 @@ export class UserController {
      * Create Owner User
      * @param body
      */
-    @Post('')
+    @Post('create')
     createUser(@Body() body: any) {
         this.users.push({
             id: newUID(),
