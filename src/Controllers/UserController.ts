@@ -16,7 +16,7 @@ import {generateJwt, hashPassword, isPasswordCorrect, newUID} from "../Utils/uti
 @JsonController('/users/')
 export class UserController {
 
-    users: User[]
+    users: User[] = []
 
     constructor() {
         this.users = [...userJson]
@@ -76,13 +76,22 @@ export class UserController {
      * Create Owner User
      * @param body
      */
-    @Post('create')
+    @Post('')
     createUser(@Body() body: any) {
-        this.users.push({
+
+        const user = {
             id: newUID(),
             password: hashPassword(body.password),
             ...body
+        }
+
+        this.users.push({
+            ...user
         })
+        return {
+            status: 'success',
+            id: user.id,
+        }
     }
 
     /**
