@@ -127,7 +127,7 @@ export class BookController {
     }
 
     findById = (id: string) => {
-        this.books.filter(book => book.id === id)
+        return this.books.filter(book => book.id === id)
     }
 
 }
