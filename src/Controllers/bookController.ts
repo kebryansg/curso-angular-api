@@ -1,4 +1,4 @@
-import {Authorized, Body, CurrentUser, Get, JsonController, Post} from "routing-controllers";
+import {Authorized, Body, CurrentUser, Get, JsonController, Param, Post} from "routing-controllers";
 import bookJson from '../data/books_public.json'
 import {Book} from "../types/book.interface";
 import {JwtUser} from "../types/jwt-user.interface";
@@ -54,6 +54,15 @@ export class BookController {
             ...book,
             id: newUID(),
         }))*/
+    }
+
+    /**
+     * Buscar libros por Identificador
+     * @param id
+     */
+    @Get('/owner/:id')
+    getById(@Param('id') id: string) {
+        return this.findById(id)
     }
 
     @Post('/filter')
@@ -115,6 +124,10 @@ export class BookController {
         return this.findByOwner(owner).filter(book =>
             book.title.includes(title)
         )
+    }
+
+    findById = (id: string) => {
+        this.books.filter(book => book.id === id)
     }
 
 }
