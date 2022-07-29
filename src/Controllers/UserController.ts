@@ -22,7 +22,7 @@ export class UserController {
         this.users = [...userJson]
     }
 
-    @Get('')
+    @Get('all')
     getAll() {
         return [...this.users]
     }
@@ -82,8 +82,8 @@ export class UserController {
 
         const user = {
             id: newUID(),
+            ...body,
             password: hashPassword(body.password),
-            ...body
         }
 
         this.users = [...this.users, user];
