@@ -112,11 +112,11 @@ export class UserController {
     }
 
     findName = (name: string) => {
-        return userJson.find((user: User) => user.name === name)
+        return this.users.find((user: User) => user.name === name)
     }
 
     existItem = (valueSearch: string, option: 'email' | 'name') => {
-        return userJson.some((user: User) => user[option] === valueSearch)
+        return this.users.some((user: User) => user[option] === valueSearch)
     }
 
 }
