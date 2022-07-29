@@ -85,9 +85,8 @@ export class UserController {
             ...body
         }
 
-        this.users.push({
-            ...user
-        })
+        this.users = [...this.users, user];
+
         return {
             status: 'success',
             id: user.id,
