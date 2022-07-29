@@ -22,10 +22,10 @@ export class UserController {
         this.users = [...userJson]
     }
 
-    /*@Get('')
+    @Get('')
     getAll() {
         return [...this.users]
-    }*/
+    }
 
     /***
      * Generate Password
@@ -43,8 +43,9 @@ export class UserController {
      */
     @Post('login')
     @ContentType('application/json')
-    login(@BodyParam("username") username: string,
-          @BodyParam("password") password: string) {
+    login(@Body() body: any) {
+
+        const {username, password} = body;
 
         //Get user from database
         let user: User;
