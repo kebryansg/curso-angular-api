@@ -1,6 +1,6 @@
 import {Authorized, Body, CurrentUser, Get, JsonController, Param, Post, Put} from "routing-controllers";
 import bookJson from '../data/books_public.json'
-import {Book} from "../types/book.interface";
+import {Book, FilterBook} from "../types/book.interface";
 import {JwtUser} from "../types/jwt-user.interface";
 import {newUID} from "../Utils/util";
 import * as lodash from "lodash";
@@ -167,7 +167,4 @@ export class BookController {
 
 }
 
-interface FilterBook {
-    category?: number[],
-    title?: string,
-}
+

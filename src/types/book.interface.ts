@@ -11,3 +11,7 @@ export interface Book {
     isbn13?: number,
     price?: string,
 }
+export interface FilterBook {
+    category?: number[],
+    title?: string,
+}
