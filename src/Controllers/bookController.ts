@@ -1,4 +1,4 @@
-import {Authorized, Body, CurrentUser, Get, JsonController, Param, Post} from "routing-controllers";
+import {Authorized, Body, CurrentUser, Get, JsonController, Param, Post, Put} from "routing-controllers";
 import bookJson from '../data/books_public.json'
 import {Book} from "../types/book.interface";
 import {JwtUser} from "../types/jwt-user.interface";
@@ -43,6 +43,37 @@ export class BookController {
         })
         return {
             cod: bookCreate.id,
+            status: true,
+        }
+    }
+
+    /**
+     * Update Book
+     * @param id
+     * @param user
+     * @param body
+     */
+    @Put('/owner/:id')
+    updateBook(@Param('id') id: string,
+               @CurrentUser({required: true}) user: JwtUser,
+               @Body() body: any) {
+
+        const bookRegister = this.findById(id)
+        const bookIndex = this.findIndexById(id)
+        let updateBook: Book = {
+            ...bookRegister,
+            ...body
+        }
+
+        // Eliminar Registro
+        this.books.splice(bookIndex, 1)
+        // Agregar Registro
+        this.books.push({
+            ...updateBook
+        })
+
+        return {
+            cod: updateBook.id,
             status: true,
         }
     }
@@ -126,8 +157,12 @@ export class BookController {
         )
     }
 
-    findById = (id: string) => {
+    findById = (id: string): Book => {
         return this.books.find(book => book.id === id)
+    }
+
+    findIndexById = (id: string): number => {
+        return this.books.findIndex(book => book.id === id)
     }
 
 }
